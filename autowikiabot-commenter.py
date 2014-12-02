@@ -23,7 +23,7 @@ def find_link(body):
             end_index = index + begin_index
             break
     else:
-        end_index = begin_index + index
+        end_index = -1
     link = body[begin_index: end_index + 1]
     return link
 
