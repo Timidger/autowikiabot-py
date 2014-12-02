@@ -26,8 +26,6 @@ def find_link(body):
         # -2 because one is added to it, and that would return an empty string
         end_index = -2
     link = body[begin_index: end_index + 1]
-    if not link:
-        raise Exception("Could not find a link in body (find_link returned null string)")
     return link
 
 def find_sub_wikia(link):
