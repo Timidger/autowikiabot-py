@@ -810,6 +810,7 @@ while True:
           ### Upload to imgur
           image_markdown = ""
           for image_url in images:
+              image_source_markdown = "[^(i)]("+image_url+")"
               uploaded_image = im.upload_image(url=image_url, title=article_name_terminal)
               image_markdown += ("====\n\n>[**"+pic_markdown+"**]("+uploaded_image.link.replace('http://','https://')+") "+image_source_markdown+caption_markdown)
               success("IMAGE PACKAGED VIA %s"%uploaded_image.link)
