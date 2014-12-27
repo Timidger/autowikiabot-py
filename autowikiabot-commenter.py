@@ -23,7 +23,8 @@ def find_link(body):
             end_index = index + begin_index
             break
     else:
-        end_index = begin_index + index
+        # -2 because one is added to it, and that would return an empty string
+        end_index = -2
     link = body[begin_index: end_index + 1]
     return link
 
@@ -773,24 +774,10 @@ while True:
         try:
           ### Extract image url
           try:
-            page_image = urllib.unquote(page_image.decode('utf-8','ignore'))
+            page = wikia.page(sub_wikia, article_name_terminal)
+            images = page.images
           except:
             raise Exception("no page image")
-          if page_image.endswith("ogg") or page_image == "":
-            raise Exception("no image")
-          url = (base_wikia_url+"api.php?action=query&titles=File:"+page_image+"&prop=imageinfo&iiprop=url|mediatype&iiurlwidth=640&format=xml")
-          socket.setdefaulttimeout(30)
-          wi_api_data = urllib2.urlopen(url).read()
-          wisoup = BeautifulSoup(wi_api_data)
-          image_url = wisoup.ii['thumburl']
-          image_source_url = wisoup.ii['descriptionurl']
-          image_source_url = re.sub(r'\)','\)',image_source_url)
-          image_source_url = re.sub(r'\(','\(',image_source_url)
-          global image_source_markdown
-          image_source_markdown = ("[^(i)]("+image_source_url+")")
-
-          ### Upload to imgur
-          uploaded_image = im.upload_image(url=image_url, title=page_image)
 
           ### Extract caption from already fetched sectiondata
           try:
@@ -819,8 +806,14 @@ while True:
               pic_markdown = "Image from article"
             caption_markdown = ""
             log(e)
-          image_markdown = ("====\n\n>[**"+pic_markdown+"**]("+uploaded_image.link.replace('http://','https://')+") "+image_source_markdown+caption_markdown)
-          success("IMAGE PACKAGED VIA %s"%uploaded_image.link)
+
+          ### Upload to imgur
+          image_markdown = ""
+          for image_url in images:
+              image_source_markdown = "[^(i)]("+image_url+")"
+              uploaded_image = im.upload_image(url=image_url, title=article_name_terminal)
+              image_markdown += ("====\n\n>[**"+pic_markdown+"**]("+uploaded_image.link.replace('http://','https://')+") "+image_source_markdown+caption_markdown)
+              success("IMAGE PACKAGED VIA %s"%uploaded_image.link)
         except Exception as e:
           image_markdown = ""
           #traceback.print_exc()
