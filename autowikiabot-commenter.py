@@ -268,7 +268,11 @@ def process_summary_call(post):
     log("EMPTY TERM")
     return(False,False)
   try:
-    title = wikia.page(sub_wikia, term,).title
+    page = wikia.page(sub_wikia, term)
+    # If the page is the main page for the wiki, don't try to summarise it
+    if page.sub_wikia.lower().replace("-", " ") + " wiki"  == page.title:
+      return (False,False)
+    title = page.title
     # If it is the main page, don't try to summarise it
     if re.search("[M,m]ain_[P,p]age", title) or re.search("[W,w]iki", title):
       return (False, False)
