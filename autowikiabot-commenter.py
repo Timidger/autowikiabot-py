@@ -645,7 +645,7 @@ while True:
           socket.setdefaulttimeout(30)
           slsoup = BeautifulSoup(urllib2.urlopen(url).read())
           for s in slsoup.find_all('s'):
-            if s['line'].lower() in ("description", "background", "about", "biography", "personality", "plot", "characteristics", "history"):
+            if s['line'].lower() in ("description", "background", "about", "biography", "personality", "plot", "characteristics", "history", "introduction"):
                 section = s['index']
                 break
         ### fetch data from wikia
