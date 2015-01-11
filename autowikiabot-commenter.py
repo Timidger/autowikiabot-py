@@ -177,7 +177,7 @@ def post_reply(reply,post):
     warn("REPLY FAILED: %s @ %s"%(e,post.subreddit))
     if str(e) == '(TOO_LONG) `this is too long (max: 15000.0)` on field `text`':
       a.delete()
-    elif str(e) == '403 Client Error: Forbidden' and str(post.subreddit) not in badsubs and "autowikiabot" not in post.subreddit:
+    elif str(e) == '403 Client Error: Forbidden' and str(post.subreddit) not in badsubs and "autowikiabot" not in str(post.subreddit):
       badsubs = badsubs_page.content_md.strip().split()
       badsubs.append(str(post.subreddit))
       editsummary = 'added '+str(post.subreddit)
