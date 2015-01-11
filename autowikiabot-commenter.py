@@ -355,6 +355,7 @@ def reddify(html):
   global has_list
   if re.search('&lt;li&gt;',html):
     has_list = True
+    html.replace("&gt;", ">")
   else:
     has_list = False
   html = html.replace('&lt;b&gt;', '__')
