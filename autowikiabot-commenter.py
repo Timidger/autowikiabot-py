@@ -268,7 +268,11 @@ def process_summary_call(post):
     log("EMPTY TERM")
     return(False,False)
   try:
-    title = wikia.page(sub_wikia, term,).title
+    page = wikia.page(sub_wikia, term)
+    # If the page is the main page for the wiki, don't try to summarise it
+    if page.sub_wikia.lower().replace("-", " ") + " wiki"  == page.title:
+      return (False,False)
+    title = page.title
     # If it is the main page, don't try to summarise it
     if re.search("[M,m]ain_[P,p]age", title) or re.search("[W,w]iki", title):
       return (False, False)
@@ -645,7 +649,7 @@ while True:
           socket.setdefaulttimeout(30)
           slsoup = BeautifulSoup(urllib2.urlopen(url).read())
           for s in slsoup.find_all('s'):
-            if s['line'].lower() in ("description", "background", "about", "biography", "personality", "plot", "characteristics", "history", "introduction"):
+            if s['line'].lower() in ("description", "background", "about", "biography", "personality", "plot", "characteristics", "history", "effects", "introduction"):
                 section = s['index']
                 break
         ### fetch data from wikia
@@ -833,7 +837,7 @@ while True:
                 continue
               topic = topic.replace(' ',' ^').replace(' ^(',' ^\(')
               interesting_list = interesting_list + " [^" + topic + "]" + "(" +topicurl.replace('http://','https://')+ ") ^|"
-            interesting_markdown = "^Interesting:"+interesting_list.strip('^|')
+            interesting_markdown = "\n^Interesting:"+interesting_list.strip('^|')
             success("%s INTERESTING ARTICLE LINKS PACKAGED"%intlist.__len__())
           else:
             raise Exception("no suggestions")
