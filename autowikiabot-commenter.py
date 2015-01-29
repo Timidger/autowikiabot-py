@@ -651,7 +651,8 @@ while True:
           slsoup = BeautifulSoup(urllib2.urlopen(url).read())
           for s in slsoup.find_all('s'):
             if s['line'].lower() in ("description", "background", "about", "biography", "personality",
-                                    "plot", "characteristics", "history", "effects", "introduction", "information"):
+                                    "plot", "characteristics", "history", "effects", "introduction", "information",
+                                    "overview"):
                 section = s['index']
                 break
         ### fetch data from wikia
