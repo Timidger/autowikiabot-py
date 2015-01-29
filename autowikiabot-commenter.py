@@ -780,8 +780,10 @@ while True:
         try:
           ### Extract image url
           try:
-            page = wikia.page(sub_wikia, article_name_terminal)
-            images = page.images
+            # NOPE! I'm standing up for net neutrality
+            images = ['https://www.battleforthenet.com/images/share_images/anigif.gif']
+            #page = wikia.page(sub_wikia, article_name_terminal)
+            #images = page.images
           except:
             raise Exception("no page image")
 
