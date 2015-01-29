@@ -780,8 +780,10 @@ while True:
         try:
           ### Extract image url
           try:
-            page = wikia.page(sub_wikia, article_name_terminal)
-            images = page.images
+            # NOPE! I'm standing up for net neutrality
+            images = ['https://www.battleforthenet.com/images/share_images/anigif.gif']
+            #page = wikia.page(sub_wikia, article_name_terminal)
+            #images = page.images
           except:
             raise Exception("no page image")
 
@@ -813,13 +815,11 @@ while True:
             caption_markdown = ""
             log(e)
 
-          ### Upload to imgur
+          ### Don't actually upload to Imgur
           image_markdown = ""
           for image_url in images:
-              image_source_markdown = "[^(i)]("+image_url+")"
-              uploaded_image = im.upload_image(url=image_url, title=article_name_terminal)
-              image_markdown += ("====\n\n>[**"+pic_markdown+"**]("+uploaded_image.link.replace('http://','https://')+") "+image_source_markdown+caption_markdown)
-              success("IMAGE PACKAGED VIA %s"%uploaded_image.link)
+              image_markdown += ("====\n\n>[**"+pic_markdown+"**]("+image_url+") "+caption_markdown)
+              success("IMAGE PACKAGED VIA %s"%images[0])
         except Exception as e:
           image_markdown = ""
           #traceback.print_exc()
