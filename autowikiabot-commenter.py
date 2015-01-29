@@ -651,7 +651,8 @@ while True:
           slsoup = BeautifulSoup(urllib2.urlopen(url).read())
           for s in slsoup.find_all('s'):
             if s['line'].lower() in ("description", "background", "about", "biography", "personality",
-                                    "plot", "characteristics", "history", "effects", "introduction", "information"):
+                                    "plot", "characteristics", "history", "effects", "introduction", "information",
+                                    "overview"):
                 section = s['index']
                 break
         ### fetch data from wikia
@@ -818,7 +819,7 @@ while True:
           ### Don't actually upload to Imgur
           image_markdown = ""
           for image_url in images:
-              image_markdown += ("====\n\n>[**"+pic_markdown+"**]("+image_url+") "+caption_markdown)
+              image_markdown += ("\n\n>[**"+pic_markdown+"**]("+image_url+") "+caption_markdown)
               success("IMAGE PACKAGED VIA %s"%images[0])
         except Exception as e:
           image_markdown = ""
