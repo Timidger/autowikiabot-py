@@ -840,7 +840,7 @@ while True:
                 continue
               topic = topic.replace(' ',' ^').replace(' ^(',' ^\(')
               interesting_list = interesting_list + " [^" + topic + "]" + "(" +topicurl.replace('http://','https://')+ ") ^|"
-            interesting_markdown = "\n^Interesting:"+interesting_list.strip('^|')
+            interesting_markdown = "\n\n>^Interesting:"+interesting_list.strip('^|')
             success("%s INTERESTING ARTICLE LINKS PACKAGED"%intlist.__len__())
           else:
             raise Exception("no suggestions")
