@@ -862,7 +862,7 @@ while True:
         else:
           nsfwtag = " [](#sfw)"
 
-        post_markdown = bit_comment_start+" [**"+article_name_terminal+"**](https://"+sub_wikia+".wikia.com/wiki/"+url_string_for_fetch.replace(')','\)')+"):"+nsfwtag+" \n\n---\n\n>"+data+"\n\n>"+image_markdown+"\n\n---\n\n"+interesting_markdown+"\n\n"
+        post_markdown = bit_comment_start+" [**"+article_name_terminal+"**](https://"+sub_wikia+".wikia.com/wiki/"+url_string_for_fetch.replace(')','\)')+") (from "+sub_wikia.title()+" wikia):"+nsfwtag+" \n\n---\n\n>"+data+"\n\n>"+image_markdown+"\n\n---\n\n"+interesting_markdown+"\n\n"
         a = post_reply(post_markdown,post)
         image_markdown = ""
         if not a:
