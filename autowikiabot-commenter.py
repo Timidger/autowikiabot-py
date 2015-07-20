@@ -1,10 +1,14 @@
 # -*- coding: utf-8 -*-
 
 import praw, time, datetime, re, urllib, urllib2, pickle, pyimgur, os, traceback, wikia, string, socket, sys, collections
+from urllib3.contrib.pyopenssl import inject_into_urllib3
 #from nsfw import getnsfw
 from util import success, warn, log, fail, special, bluelog
 from bs4 import BeautifulSoup
 from HTMLParser import HTMLParser
+
+# This makes urllib3 verify HTTPS requests
+inject_into_urllib3()
 
 WIKI_URL = 'wikia.com/wiki'
 ### Uncomment to debug
