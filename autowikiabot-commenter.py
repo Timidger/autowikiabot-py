@@ -419,10 +419,13 @@ while True:
       ### Dirty timer hack
       now = int(float(time.strftime("%s")))
       diff = now - lastload
+      # Every 15 minutes, update the banned user list and the OAuth credentials
       if diff > 899:
         banned_users = banned_users_page.content_md.strip().split()
         bluelog("BANNED USER LIST RENEWED")
         save_changing_variables('scheduled dump')
+        access_information = r.refresh_access_information(refresh_token)
+        bluelog("Updated OAuth access information")
         lastload = now
 
       if filterpass(post):
