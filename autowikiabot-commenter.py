@@ -869,6 +869,11 @@ while True:
     save_changing_variables('exit dump')
     warn("EXITING")
     break
+  except requests.HTTPError as e:
+    log("url was:", url)
+    warn("GLOBAL: %s" %e)
+    time.sleep(3)
+    continue
   except Exception as e:
     traceback.print_exc()
     warn("GLOBAL: %s"%e)
