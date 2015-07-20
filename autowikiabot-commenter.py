@@ -97,7 +97,7 @@ with open ('datafile.inf', 'r') as myfile:
   datafile_lines=myfile.readlines()
 
 ### Login
-r = praw.Reddit("autowikiabot by /u/timidger at /r/autowikiabot")
+r = praw.Reddit("posts summaries for wikia links, by /u/iprefervim")
 USERNAME = datafile_lines[0].strip()
 PASSWORD = datafile_lines[1].strip()
 Trying = True
