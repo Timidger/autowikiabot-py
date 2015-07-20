@@ -106,6 +106,7 @@ r.set_oauth_app_info(client_id="cSePd9Cin2DCXg",
 refresh_token = "29185073-IBe2QPiZ4RiDlNJ7Jbnb_fKxbkk"
 access_information = r.refresh_access_information(refresh_token)
 USERNAME = r.get_me()
+success("LOGGED IN")
 
 def is_summon_chain(post):
   if not post.is_root:
