@@ -98,20 +98,14 @@ with open ('datafile.inf', 'r') as myfile:
 
 ### Login
 r = praw.Reddit("posts summaries for wikia links, by /u/iprefervim")
-USERNAME = datafile_lines[0].strip()
-PASSWORD = datafile_lines[1].strip()
-Trying = True
-while Trying:
-        try:
-                r.login(USERNAME, PASSWORD)
-                success("LOGGED IN")
-                Trying = False
-        except praw.errors.InvalidUserPass:
-                fail("WRONG USERNAME OR PASSWORD")
-                exit()
-        except Exception as e:
-          fail("%s"%e)
-          time.sleep(5)
+# This info is from the apps/prefs page. /u/autowikiabot can access it
+r.set_oauth_app_info(client_id="cSePd9Cin2DCXg",
+                     client_secret="hWrnXmQyPwIhM8lFYlkx1Q8QQug",
+                     redirect_uri="http://www.example.com/unused/redirect/uri")
+# This is a refresh token that refreshes the credentials, which expire every hour
+refresh_token = "29185073-IBe2QPiZ4RiDlNJ7Jbnb_fKxbkk"
+access_information = r.refresh_access_information(refresh_token)
+USERNAME = r.get_me()
 
 def is_summon_chain(post):
   if not post.is_root:
